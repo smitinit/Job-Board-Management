@@ -64,3 +64,11 @@ You will develop a Job Board Application where users can:
 3. UI/UX – Clean design, responsiveness, and user experience.
 4. Best Practices – Efficient state management, API handling, and accessibility.
 5. Bonus Implementations – Any additional features implemented beyond the requirements.
+
+## Remotive API
+
+```
+https://remotive.com/api/remote-jobs
+```
+
+![alt text](public/remotive-help.png)
