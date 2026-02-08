@@ -27,42 +27,43 @@ export async function applyJobAction(formData: FormData) {
   if (!jobId || !name || !email || !resume) {
     throw new Error("jobId, name, email and resume are required");
   }
+  if (process.env.NODE_ENV === "development") {
+    await fs.mkdir(RESUMES_DIR, { recursive: true });
 
-  await fs.mkdir(RESUMES_DIR, { recursive: true });
+    const id = crypto.randomUUID();
 
-  const id = crypto.randomUUID();
+    // get the file extension
+    const ext = resume.name.split(".").pop() || "pdf";
 
-  // get the file extension
-  const ext = resume.name.split(".").pop() || "pdf";
+    const resumeFileName = `${id}-resume.${ext}`;
+    const resumePath = path.join(RESUMES_DIR, resumeFileName);
 
-  const resumeFileName = `${id}-resume.${ext}`;
-  const resumePath = path.join(RESUMES_DIR, resumeFileName);
+    // File → Buffer
+    const buffer = Buffer.from(await resume.arrayBuffer());
+    await fs.writeFile(resumePath, buffer);
 
-  // File → Buffer
-  const buffer = Buffer.from(await resume.arrayBuffer());
-  await fs.writeFile(resumePath, buffer);
+    const record: StoredApplication = {
+      id,
+      jobId,
+      name,
+      email,
+      phone,
+      resumeName: resumeFileName,
+      appliedAt: new Date().toISOString(),
+    };
 
-  const record: StoredApplication = {
-    id,
-    jobId,
-    name,
-    email,
-    phone,
-    resumeName: resumeFileName,
-    appliedAt: new Date().toISOString(),
-  };
+    let data: StoredApplication[] = [];
 
-  let data: StoredApplication[] = [];
+    try {
+      data = JSON.parse(await fs.readFile(DATA_FILE, "utf-8"));
+    } catch {
+      data = [];
+    }
 
-  try {
-    data = JSON.parse(await fs.readFile(DATA_FILE, "utf-8"));
-  } catch {
-    data = [];
+    data.push(record);
+
+    await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
   }
-
-  data.push(record);
-
-  await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
 
   return { success: true };
 }
