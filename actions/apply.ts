@@ -1,10 +1,7 @@
 "use server";
 
-import { redirect } from "next/navigation";
-
 import fs from "fs/promises";
 import path from "path";
-import { toast } from "sonner";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "data.json");
