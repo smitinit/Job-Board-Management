@@ -3,7 +3,7 @@
 import { JobCardType } from "@/types";
 import JobCard from "./design/JobCard";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Input } from "./ui/input";
 import {
   Select,
@@ -14,12 +14,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { Button } from "./ui/button";
 
 export default function Jobs({ jobs }: { jobs: JobCardType[] }) {
   const [filterFields, setFilterFields] = useState({
     title: "",
     category: "all",
   });
+
+  const [page, setPage] = useState(1);
 
   const getAllCategory = [
     "All",
@@ -45,6 +48,22 @@ export default function Jobs({ jobs }: { jobs: JobCardType[] }) {
     });
   }, [jobs, filterFields]);
 
+  // pagination
+  const totalJobs = filteredJobs.length;
+  const totalPerPage = 10;
+  const totalPages = Math.ceil(totalJobs / totalPerPage);
+
+  const paginatedJobs = filteredJobs.slice(
+    (page - 1) * totalPerPage,
+    page * totalPerPage,
+  );
+
+  useEffect(() => {
+    // reset page to 1 when filter changes
+    if (page > totalPages) {
+      setPage(1);
+    }
+  }, [page, totalPages]);
   return (
     <>
       <div className="sticky top-0 z-50 grid grid-cols-2 px-4 py-2 gap-2 bg-background">
@@ -80,14 +99,35 @@ export default function Jobs({ jobs }: { jobs: JobCardType[] }) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-        {filteredJobs.length ? (
-          filteredJobs.map((job) => <JobCard key={job.id} job={job} />)
+        {paginatedJobs.length ? (
+          paginatedJobs.map((job) => <JobCard key={job.id} job={job} />)
         ) : (
           <div className="text-center col-span-1 md:col-span-2 lg:col-span-3">
             No jobs match your filters!
           </div>
         )}
       </div>
+      {paginatedJobs.length > 0 && (
+        <div className="sticky bottom-10 flex w-full justify-end z-50">
+          <div className="flex gap-2 w-fit bg-accent rounded-full p-2 items-center">
+            <Button
+              onClick={() => setPage((page) => Math.max(page - 1, 1))}
+              disabled={page === 1}
+            >
+              Previous
+            </Button>
+            <span className="text-base">
+              Page {page} of {totalPages}
+            </span>
+            <Button
+              onClick={() => setPage((page) => Math.min(totalPages, page + 1))}
+              disabled={page === totalPages}
+            >
+              Next
+            </Button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

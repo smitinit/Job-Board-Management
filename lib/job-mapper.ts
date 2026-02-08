@@ -1,6 +1,6 @@
 import { JobCardType, DetailedJobType } from "@/types";
 
-export function mapJSearchToJobCard(job: any): JobCardType {
+export function mapJobsField(job: any): JobCardType {
   // Posted time (text + numeric)
   const postedText =
     job.job_posted_at ??
@@ -58,9 +58,9 @@ export function mapJSearchToJobCard(job: any): JobCardType {
   };
 }
 
-export function mapJSearchToDetailedJob(job: any): DetailedJobType {
+export function mapJobByIdFields(job: any): DetailedJobType {
   return {
-    ...mapJSearchToJobCard(job),
+    ...mapJobsField(job),
 
     description: job.job_description ?? "",
 
