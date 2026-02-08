@@ -50,7 +50,7 @@ export default function Jobs({ jobs }: { jobs: JobCardType[] }) {
 
   // pagination
   const totalJobs = filteredJobs.length;
-  const totalPerPage = 10;
+  const totalPerPage = 6;
   const totalPages = Math.ceil(totalJobs / totalPerPage);
 
   const paginatedJobs = filteredJobs.slice(
@@ -108,8 +108,8 @@ export default function Jobs({ jobs }: { jobs: JobCardType[] }) {
         )}
       </div>
       {paginatedJobs.length > 0 && (
-        <div className="sticky bottom-10 flex w-full justify-end z-50">
-          <div className="flex gap-2 w-fit bg-accent rounded-full p-2 items-center">
+        <div className="fixed bottom-5 z-50 flex ">
+          <div className="flex gap-2 w-fit rounded-full p-4 items-center">
             <Button
               onClick={() => setPage((page) => Math.max(page - 1, 1))}
               disabled={page === 1}
