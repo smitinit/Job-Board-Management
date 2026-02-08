@@ -16,7 +16,7 @@ export default async function JobDetailPage({
   if (!jobData || !jobData.id) {
     return (
       <div className="text-center">
-        Job not found! <br />{" "}
+        Job not found! <br />
         <Button asChild variant="link">
           <Link href="/">Back to Home</Link>
         </Button>

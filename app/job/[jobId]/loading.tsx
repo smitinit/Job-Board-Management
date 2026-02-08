@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
-    <div className="mx-auto max-w-4xl space-y-6 py-4">
+    <div className="mx-auto max-w-4xl space-y-6">
       <Card>
         <CardHeader className="space-y-3">
           <div className="flex items-start gap-4">
@@ -16,9 +16,9 @@ export default function Loading() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <Skeleton className="h-6 w-24 rounded-full" />
-            <Skeleton className="h-6 w-20 rounded-full" />
-            <Skeleton className="h-6 w-28 rounded-full" />
+            <Skeleton className="h-6 w-24 rounded-md" />
+            <Skeleton className="h-6 w-20 rounded-md" />
+            <Skeleton className="h-6 w-28 rounded-md" />
 
             <div className="flex flex-wrap gap-4">
               <Skeleton className="h-4 w-32" />
@@ -26,17 +26,21 @@ export default function Loading() {
             </div>
           </div>
 
-          <Skeleton className="h-10 w-32 rounded-md" />
+          <div className="flex justify-end gap-2">
+            <Skeleton className="h-10 w-28 rounded-md" />
+            <Skeleton className="h-9 w-20 rounded-md" />
+          </div>
         </CardHeader>
       </Card>
 
       <div className="flex justify-between gap-4 w-full">
-        <Card className="w-1/3 h-fit sticky top-20">
+        <Card className="w-1/3 h-fit sticky top-4">
           <CardHeader>
             <CardTitle>
               <Skeleton className="h-5 w-32" />
             </CardTitle>
           </CardHeader>
+
           <CardContent className="flex flex-col gap-4">
             {Array.from({ length: 7 }).map((_, i) => (
               <div key={i} className="space-y-1">
@@ -53,6 +57,7 @@ export default function Loading() {
               <Skeleton className="h-5 w-40" />
             </CardTitle>
           </CardHeader>
+
           <CardContent className="space-y-3">
             {Array.from({ length: 8 }).map((_, i) => (
               <Skeleton key={i} className="h-4 w-full" />
