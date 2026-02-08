@@ -3,7 +3,7 @@ import { Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Navbar } from "@/components/Navbar";
-
+import { Toaster } from "@/components/ui/sonner";
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistMono = Geist_Mono({
@@ -34,6 +34,7 @@ export default function RootLayout({
 
           <main className="mx-auto max-w-7xl">{children}</main>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

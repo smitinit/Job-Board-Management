@@ -55,7 +55,6 @@ export default function JobDetails({ job }: { job: DetailedJobType }) {
               </Badge>
             )}
 
-            {/* Location + time */}
             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
                 <MapPin className="h-4 w-4" />

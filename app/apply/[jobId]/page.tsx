@@ -7,7 +7,7 @@ export default async function ApplyPage({
 }) {
   const { jobId } = await params;
   return (
-    <div className="flex h-screen justify-center items-center ">
+    <div className="flex items-center ">
       <ApplyForm jobId={jobId} />
     </div>
   );
