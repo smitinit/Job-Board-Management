@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { JobsProvider } from "@/store";
+import { Navbar } from "@/components/Navbar";
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -30,9 +30,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <JobsProvider>
-            <main className="mx-auto max-w-7xl">{children}</main>
-          </JobsProvider>
+          <Navbar />
+
+          <main className="mx-auto max-w-7xl">{children}</main>
         </ThemeProvider>
       </body>
     </html>
