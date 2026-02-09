@@ -73,3 +73,11 @@ https://remotive.com/api/remote-jobs
 
 Currently using JSearch API
 ```
+
+# Flow
+
+```
+-> / → All Jobs → View Job → /job/:jobId → Job Details → Apply → /apply/:jobId → Submit Form
+- Dev: store in JSON
+- Prod: dummy submission
+```
