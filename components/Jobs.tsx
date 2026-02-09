@@ -54,8 +54,8 @@ export default function Jobs({ jobs }: { jobs: JobCardType[] }) {
   const totalPages = Math.ceil(totalJobs / totalPerPage);
 
   const paginatedJobs = filteredJobs.slice(
-    (page - 1) * totalPerPage,
-    page * totalPerPage,
+    (page - 1) * totalPerPage, // 1->0, 2->6
+    page * totalPerPage, // 1->6, 2->12
   );
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function Jobs({ jobs }: { jobs: JobCardType[] }) {
             setFilterFields({ ...filterFields, category: value })
           }
         >
-          <SelectTrigger className="w-full sm:w-[160px]">
+          <SelectTrigger className="w-full sm:w-40">
             <SelectValue placeholder="Categories" />
           </SelectTrigger>
           <SelectContent>

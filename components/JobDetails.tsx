@@ -89,8 +89,6 @@ export default function JobDetails({ job }: { job: DetailedJobType }) {
             <Detail label="City" value={job.city} />
             <Detail label="State" value={job.state} />
             <Detail label="Country" value={job.country} />
-            <Detail label="Source" value={job.publisher} />
-            <Detail label="Job Zone" value={job.job_zone} />
           </CardContent>
         </Card>
 
