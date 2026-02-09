@@ -68,7 +68,8 @@ You will develop a Job Board Application where users can:
 ## Remotive API
 
 ```
+legacy
 https://remotive.com/api/remote-jobs
-```
 
-![alt text](public/remotive-help.png)
+Currently using JSearch API
+```
